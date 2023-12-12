@@ -27,7 +27,9 @@ class Video(Element, component='video.js'):
         for a list of events you can subscribe to using the generic event subscription `on()`.
         """
         super().__init__()
-        if Path(src).is_file():
+        if src.startswith('http://') or src.startswith('https://'):
+            pass
+        elif Path(src).is_file():
             src = core.app.add_media_file(local_file=src)
         self._props['src'] = src
         self._props['controls'] = controls
